@@ -13,3 +13,10 @@ There are three main part of the project:
 2. Porting the Matlab code to java
 3. Finally, the android app.
 
+## How to run the code:
+
+In the folder "matlab_code_main_algo", extract EXL_IMU.zip.
+
+Inside that, EXL_IMU/Experiments_BIMRA/mainDriverCode.m
+
+There are lots of hard-coded path. You need to fix that as per your system. I know there are better ways to handle this.
