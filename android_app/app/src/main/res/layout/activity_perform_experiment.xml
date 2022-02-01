@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.PerformExperimentActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/lyPerformExperimentMainDashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/White"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <include
+                android:id="@+id/tool_bar"
+                layout="@layout/tool_bar"></include>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/DialogWhite"
+                android:elevation="5dp"
+                android:orientation="horizontal">
+                >
+
+                <TextView
+                    android:id="@+id/tvSensors"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="SENSORS"
+                    android:layout_above="@+id/lySensors"
+                    android:layout_alignParentTop="true" />
+
+                <ImageView
+                    android:id="@+id/imgSelectSensors"
+                    style="@style/ActionIconTheme"
+                    android:layout_toLeftOf="@+id/imgConfigSensors"
+                    android:src="@drawable/ic_donut_small_black_24dp" />
+
+
+                <ImageView
+                    android:id="@+id/imgConfigSensors"
+                    style="@style/ActionIconTheme"
+                    android:layout_toLeftOf="@+id/imgRefreshSensorStatus"
+                    android:src="@drawable/ic_settings_remote_black_24dp" />
+
+                <ImageView
+                    android:id="@+id/imgRefreshSensorStatus"
+                    style="@style/ActionIconTheme"
+                    android:layout_toLeftOf="@+id/imgBtnShowHideSensors"
+                    android:src="@drawable/ic_refresh_black_48dp"
+                    android:layout_alignBottom="@+id/imgConfigSensors" />
+
+
+                <LinearLayout
+                    android:id="@+id/lySensors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgBtnShowHideSensors"
+                    android:clipToPadding="false"
+
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/tvPerformTrialSensorStatus"
+                            style="@style/sensorHomeParamVal"
+                            android:layout_gravity="left"
+                            android:text="8 Connected"
+                            android:textAllCaps="false"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            android:layout_width="match_parent" />
+
+                        <TextView
+                            android:id="@+id/tvPerformTrialPacketType"
+                            style="@style/sensorHomeParamVal"
+                            android:text="Packet Type: AGMOB"
+                            android:layout_width="match_parent" />
+
+                        <TextView
+                            android:id="@+id/tvInfoSaveLocation"
+                            style="@style/sensorHomeParamVal"
+                            android:text="Save path: "
+                            android:visibility="gone"
+                            android:layout_width="match_parent" />
+
+
+                        <TextView
+                            android:id="@+id/tvPerformTrialPositions"
+                            style="@style/sensorHomeParamVal"
+                            android:maxLines="8"
+                            android:text="Position"
+                            android:layout_width="match_parent" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <Button
+                                android:id="@+id/btnConnectSelectedSensors"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ripple_green"
+                                android:padding="5dp"
+                                android:text="Connect"
+                                android:textAllCaps="true"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
+                                android:textStyle="normal" />
+
+                            <Button
+                                android:id="@+id/btnRefreshInfo"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ripple_blue"
+                                android:padding="5dp"
+                                android:text="Fix Info"
+                                android:textAllCaps="true"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
+                                android:visibility="gone"
+                                android:textStyle="normal" />
+
+                            <Button
+                                android:id="@+id/btnDisconnect"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ripple_medium_red"
+                                android:padding="5dp"
+                                android:text="Disconnect"
+                                android:textAllCaps="true"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
+                                android:textStyle="normal"
+                                android:visibility="visible" />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/imgBtnShowHideSensors"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_keyboard_arrow_up_black_48dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_alignTop="@+id/imgRefreshSensorStatus"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/DialogWhite"
+                android:elevation="5dp"
+                android:orientation="horizontal">
+                >
+
+
+                <TextView
+                    android:id="@+id/tvCalibration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="CALIBRATION" />
+
+
+                <ImageView
+                    android:id="@+id/imgLoadJVals"
+                    style="@style/ActionIconTheme"
+                    android:layout_toLeftOf="@+id/imgResetCalibrationData"
+                    android:src="@drawable/ic_chrome_reader_mode_black_24dp" />
+
+                <ImageView
+                    android:id="@+id/imgResetCalibrationData"
+                    style="@style/ActionIconTheme"
+                    android:layout_toLeftOf="@+id/imgBtnShowHideCalibration"
+                    android:src="@drawable/ic_delete_black_24dp" />
+
+
+                <ImageView
+                    android:id="@+id/imgBtnShowHideCalibration"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_keyboard_arrow_up_black_48dp" />
+
+
+                <LinearLayout
+                    android:id="@+id/lyCalibration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/imgBtnShowHideCalibration"
+                    android:elevation="5dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/lyCardInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvCalibrationStatus"
+                            style="@style/sensorHomeParamVal"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="left"
+                            android:layout_marginBottom="0dp"
+                            android:maxLines="5"
+                            android:text="Calibration Not Done"
+                            android:textAllCaps="false"
+                            android:textSize="12dp"
+                            android:textStyle="bold"
+                            android:visibility="visible" />
+
+                        <TextView
+                            android:id="@+id/tvThreadStatus"
+                            style="@style/sensorHomeParamVal"
+                            android:maxLines="4"
+                            android:text="Result ?"
+                            android:textStyle="normal"
+                            android:visibility="gone" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="right"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+
+                            <Spinner
+                                android:id="@+id/spnJointsAvailable"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+
+                            <Button
+                                android:id="@+id/btnCollectCalibrationData"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ripple_blue"
+                                android:padding="5dp"
+                                android:text="Collect Data"
+                                android:textAllCaps="true"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
+                                android:textStyle="normal" />
+
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="right"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <Spinner
+                                android:id="@+id/spnCalibDataAvailable"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <Button
+                                android:id="@+id/btnDoCalibration"
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ripple_medium_red"
+                                android:padding="5dp"
+                                android:text="Calibrate"
+                                android:textAllCaps="true"
+                                android:textColor="@color/white"
+                                android:textSize="12dp"
+                                android:textStyle="normal" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/lyWalkingTrials"
+                android:layout_width="342dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/DialogWhite"
+                android:elevation="5dp"
+                android:orientation="vertical"
+                android:layout_weight="0.22">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvWalkingTrials"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="WALKING TRIALS" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/imgBtnShowHideWalkingTrials"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/ic_keyboard_arrow_down_black_48dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lyTrials"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="right"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/tvNoWalkingTrials"
+                        style="@style/sensorHomeParamVal"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:padding="5dp"
+                        android:text="No Walking Trials"
+                        android:textAllCaps="true"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/cardViewWalks"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+
+                    <Button
+                        android:id="@+id/btnPerformWalkingTrial"
+                        style="@style/NormalButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ripple_blue"
+                        android:text="Perform Walking Trial"
+                        android:textSize="12dp" />
+
+                    <Button
+                        android:id="@+id/btnRunCalculations"
+                        style="@style/NormalButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ripple_medium_red"
+                        android:text="Calculate"
+                        android:textSize="12dp"
+                        android:visibility="gone"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</android.support.design.widget.CoordinatorLayout>

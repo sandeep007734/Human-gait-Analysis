@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/settingsInfo"
+            android:text="Select the speed at which data is to be broadcasted. There are some restricition base on selected packet type."
+            android:textColor="@color/gray18"
+            android:textSize="12dp" />
+
+
+        <LinearLayout
+            android:id="@+id/lyVerifyCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rbTwo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="200 Hz" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:maxLines="3"
+                    android:text="100 Hz if a packet type with orientation is chosen."
+                    android:textColor="@color/gray18"
+                    android:textSize="12dp" />
+
+                <RadioButton
+                    android:id="@+id/rbHundred"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="100 Hz" />
+
+                <RadioButton
+                    android:id="@+id/rbFifty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="50 Hz" />
+
+                <RadioButton
+                    android:id="@+id/rbThirtyTHree"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="33.33 Hz" />
+
+                <RadioButton
+                    android:id="@+id/rbTwentyFive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="25 Hz" />
+
+                <RadioButton
+                    android:id="@+id/rbTwenty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="20 Hz" />
+
+                <RadioButton
+                    android:id="@+id/rbSixteen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="16.67 Hz" />
+
+                <RadioButton
+                    android:id="@+id/rbTwelve"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="12.5 Hz" />
+
+                <RadioButton
+                    android:id="@+id/rbTen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="10 Hz" />
+
+                <RadioButton
+                    android:id="@+id/rbFive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="5 Hz" />
+
+                <RadioButton
+                    android:id="@+id/rbThreeHundred"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="300 Hz" />
+
+                <TextView
+                    style="@style/settingsInfo"
+                    android:text="No magnetometer data, 100 Hz if a packet type with orientation is chosen."
+                    android:textColor="@color/gray18"
+                    android:textSize="12dp" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSampleOk"
+                    style="@style/DialogButton"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+
+                    android:text="OK" />
+
+                <Button
+                    android:id="@+id/btnSampleCancel"
+                    style="@style/DialogButton"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="5dp"
+
+                    android:text="Cancel" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

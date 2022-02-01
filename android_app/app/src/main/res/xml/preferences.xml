@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.afollestad.materialdialogs.prefs.MaterialListPreference
+        android:entries="@array/accFSValues"
+        android:entryValues="@array/accFSValues"
+        android:key="unused_key01"
+        android:layout="@layout/preference_custom"
+        android:persistent="true"
+        android:summary="The upper and lower limits of what the accelerometer can measure. A smaller full-scale range means a more sensitive output."
+        android:title="Acceleration Full Scale" />
+
+    <com.afollestad.materialdialogs.prefs.MaterialListPreference
+        android:entries="@array/accFSValues"
+        android:entryValues="@array/accFSValues"
+        android:key="unused_key01"
+        android:layout="@layout/preference_custom"
+        android:persistent="true"
+        android:summary="The upper and lower limits of what the accelerometer can measure. A smaller full-scale range means a more sensitive output."
+        android:title="Gyroscope Full Scale" />
+
+    <com.afollestad.materialdialogs.prefs.MaterialListPreference
+        android:entries="@array/accFSValues"
+        android:entryValues="@array/accFSValues"
+        android:key="unused_key01"
+        android:layout="@layout/preference_custom"
+        android:persistent="true"
+        android:summary="The upper and lower limits of what the accelerometer can measure. A smaller full-scale range means a more sensitive output."
+        android:title="Packet Type" />
+
+
+    <com.afollestad.materialdialogs.prefs.MaterialEditTextPreference
+        android:defaultValue="@string/edittext_pref_optionalvalue"
+        android:dialogMessage="@string/optional_dialog_message"
+        android:dialogTitle="@string/edittext_pref_dialogtitle"
+        android:inputType="textPersonName"
+        android:key="unused_key03"
+        android:layout="@layout/preference_custom"
+        android:persistent="true"
+        android:summary="@string/edittext_pref_desc"
+        android:title="@string/edittext_pref_title" />
+
+
+    <com.afollestad.materialdialogs.prefs.MaterialDialogPreference
+    android:dialogIcon="@drawable/iisc_logo"
+    android:dialogMessage="@string/preference_dialog_message"
+    android:dialogTitle="@string/preference_dialog_title"
+    android:key="unused_key00"
+    android:negativeButtonText="@android:string/cancel"
+    android:positiveButtonText="@android:string/ok"
+    android:summary="Computer Science and Automation Department, Indian Institute of Science, Bangalore"
+    android:title="ABOUT" />
+
+</PreferenceScreen>

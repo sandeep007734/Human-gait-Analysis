@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="csa.iisc.gaitanalysis.Activities.SensorSettingsActivity">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"></include>yo
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tool_bar"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/lyaccFsValue"
+            style="@style/SettingsLinearLayout"
+            >
+
+            <TextView
+                style="@style/sensorSettingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Acceleration Full Scale"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:id="@+id/accFsValue"
+                style="@style/sensorSettingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="\u00B12g"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyGyroFsValue"
+            style="@style/SettingsLinearLayout"
+            >
+
+            <TextView
+                style="@style/sensorSettingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gyroscope Full Scale"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:id="@+id/gyroFsValue"
+                style="@style/sensorSettingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="\u00B1200dps"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyPktTypeValue"
+            style="@style/SettingsLinearLayout"
+            >
+
+            <TextView
+                style="@style/sensorSettingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Packet Type"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:id="@+id/pktTypeValue"
+                style="@style/sensorSettingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="AGMOB"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyOrienAlgoValue"
+            style="@style/SettingsLinearLayout"
+            >
+
+            <TextView
+                style="@style/sensorSettingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Orientation Algorithm"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:id="@+id/orienAlgoValue"
+                style="@style/sensorSettingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kalman Filtering"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lySampleRateValue"
+            style="@style/SettingsLinearLayout"
+            >
+
+            <TextView
+                style="@style/sensorSettingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sample Rate"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:id="@+id/sampleRateValue"
+                style="@style/sensorSettingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="100Hz"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyStreamValue"
+            style="@style/SettingsLinearLayout">
+
+            <TextView
+                style="@style/sensorSettingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Stream Log"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/streamValue"
+                style="@style/sensorSettingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Stream via Bluetooth" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lySwrfdValue"
+            style="@style/SettingsLinearLayout">
+
+            <TextView
+                style="@style/sensorSettingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SWRFD "
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/swrfdValue"
+                style="@style/sensorSettingText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Immediately After Start" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

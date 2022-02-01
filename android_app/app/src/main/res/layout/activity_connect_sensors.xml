@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".Activities.SensorsDashboardActivity">
+
+    <LinearLayout
+        android:id="@+id/mainContentLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar"></include>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <Button
+                android:id="@+id/btnSelectAll"
+                style="@style/NormalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_blue"
+                android:text="Select All"
+                android:visibility="gone"
+                />
+
+            <Button
+                android:id="@+id/btnDeSelectAll"
+                style="@style/NormalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_blue"
+                android:text="Deselect All"
+                android:visibility="gone"
+                />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycleViewSensors"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="2"
+            >
+            <Button
+                android:id="@+id/btnListSensors"
+                style="@style/NormalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_blue"
+                android:text="List Sensors"
+                />
+
+            <Button
+                android:id="@+id/btnRefresh"
+                style="@style/NormalButton"
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_green"
+                android:text="Refresh"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

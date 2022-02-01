@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/actSensorHome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.SensorHomeActivity">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tool_bar"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+
+                    style="@style/sensorHomeParamValName"
+                    android:text="Position" />
+
+                <TextView
+
+                    style="@style/sensorHomeParamValName"
+
+                    android:text="Mac Address" />
+
+                <TextView
+
+                    style="@style/sensorHomeParamValName"
+
+                    android:text="Acceleration FS"
+              />
+
+                <TextView
+
+                    style="@style/sensorHomeParamValName"
+                    android:text="Gyroscope FS" />
+
+                <TextView
+
+                    style="@style/sensorHomeParamValName"
+                    android:text="Packet Type" />
+
+                <TextView
+
+                    style="@style/sensorHomeParamValName"
+                    android:text="Orientation Algo" />
+
+                <TextView
+                    style="@style/sensorHomeParamValName"
+                    android:text="Sample Rate" />
+
+                <TextView
+                    style="@style/sensorHomeParamValName"
+                    android:text="Sensor Voltage" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lyCardInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tvSensorName"
+                    style="@style/sensorHomeParamVal"
+                    android:layout_gravity="left"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="Sensor 01"
+                    android:textSize="15dp"
+                    android:textStyle="normal"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tvSensorPos"
+                    style="@style/sensorHomeParamVal"
+                    android:text="NA" />
+
+                <TextView
+                    android:id="@+id/tvmacAdd"
+                    style="@style/sensorHomeParamVal"
+
+                    android:text="NA" />
+
+                <TextView
+                    android:id="@+id/tvAccFS"
+                    style="@style/sensorHomeParamVal"
+                    android:text="NA"
+ />
+
+                <TextView
+                    android:id="@+id/tvGyroFS"
+                    style="@style/sensorHomeParamVal"
+                    android:text="NA" />
+
+                <TextView
+                    android:id="@+id/tvPacketType"
+                    style="@style/sensorHomeParamVal"
+                    android:text="NA"/>
+
+                <TextView
+                    android:id="@+id/tvOrientAlgo"
+                    style="@style/sensorHomeParamVal"
+                    android:text="NA"/>
+
+                <TextView
+                    android:id="@+id/tvSampleRate"
+                    style="@style/sensorHomeParamVal"
+                    android:text="NA" />
+
+                <TextView
+                    android:id="@+id/tvSensorBatt"
+                    style="@style/sensorHomeParamVal"
+                    android:text="NA" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <ToggleButton
+                    android:id="@+id/toggleConnect"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:background="@color/Red"
+                    android:padding="5dp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textOff="Disconnected"
+                    android:textOn="Connected"
+                    android:textSize="12dp"
+                    android:textStyle="normal" />
+
+
+                <ToggleButton
+                    android:id="@+id/toggleStream"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ripple_blue"
+                    android:padding="5dp"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textOff="Stream Off"
+                    android:textOn="Stream On"
+                    android:textSize="12dp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btnGetParameters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Param" />
+
+            <Button
+                android:id="@+id/btnParamMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Disconnect" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:background="@color/AntiqueWhite"
+            android:gravity="bottom"
+            android:maxLines="999999"
+            android:scrollbars="vertical"
+            android:textColor="@color/Black"
+            android:textSize="10dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>

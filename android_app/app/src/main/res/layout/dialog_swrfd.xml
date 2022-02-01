@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/lyVerifyCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rbStartCommand"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Start Command" />
+
+                <TextView
+                    style="@style/settingsInfo"
+                    android:text="Data streaming and/or logging begins immediately after START command has been sent."
+                    android:textColor="@color/gray18"
+                    android:textSize="12dp" />
+
+                <RadioButton
+                    android:id="@+id/rbStartNoPower"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Start Command and No Power" />
+
+                <TextView
+                    style="@style/settingsInfo"
+                    android:maxLines="7"
+                    android:text="Data streaming and/or logging begins immediately after START  command has been sent only if the EXLs3 is not powered by the docking station, otherwise it waits the dock’s power supply being removed before starting streaming/logging. When the EXLs3 is put back in the docking station and the power supply is restored, it stops streaming/logging."
+                    android:textColor="@color/gray18"
+                    android:textSize="12dp" />
+
+                <RadioButton
+                    android:id="@+id/rbContinuousStreaming"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Continuous Data Streaming" />
+
+                <TextView
+                    style="@style/settingsInfo"
+                    android:text="Continuous data logging when the EXLs3 is not powered by the docking station, without start/stop commands. In this operating mode no Bluetooth connection is required."
+                    android:textColor="@color/gray18"
+                    android:textSize="12dp" />
+
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSwrfdOk"
+                    style="@style/DialogButton"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+
+                    android:text="OK" />
+
+                <Button
+                    android:id="@+id/btnSwrfdCancel"
+                    style="@style/DialogButton"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="5dp"
+
+                    android:text="Cancel" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

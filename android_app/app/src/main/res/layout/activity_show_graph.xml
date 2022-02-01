@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".Activities.ShowGraphActivity">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar"></include>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="463dp"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/mChart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/mChart2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"></com.github.mikephil.charting.charts.LineChart>
+
+    </LinearLayout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnCalcHSandTO"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/ripple_blue"
+            android:padding="5dp"
+            android:text="HS and TO"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:textStyle="normal"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnShowAvg"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/ripple_medium_red"
+            android:padding="5dp"
+            android:text="Average Angles"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:textStyle="normal"
+            android:visibility="visible" />
+
+        </LinearLayout>
+
+
+</LinearLayout>

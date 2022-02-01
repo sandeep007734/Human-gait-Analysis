@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/trialCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_margin="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:orientation="horizontal"
+
+        android:padding="10dp"
+
+        >
+
+        <TextView
+            android:id="@+id/tvExperimentId"
+            style="@style/scoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="1" />
+
+
+        <LinearLayout
+            android:id="@+id/lyCardInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            `
+
+            <TextView
+                android:id="@+id/tvExperimentName"
+                style="@style/sensorHomeParamVal"
+                android:layout_gravity="left"
+                android:layout_marginBottom="0dp"
+
+                android:text="K. Gopinath"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvExperimentDateTime"
+                style="@style/sensorHomeParamVal"
+                android:layout_width="150dp"
+                android:maxLines="2"
+                android:text="12 Nov 2015, 11:53" />
+
+            <TextView
+                android:id="@+id/tvNoOfWalks"
+                style="@style/sensorHomeParamVal"
+                android:layout_gravity="left"
+
+                android:layout_marginTop="2dp"
+                android:text="0 Walks"
+                android:textColor="@color/gray15"
+                android:textSize="12dp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tvExperimentStatus"
+                style="@style/sensorHomeParamVal"
+                android:layout_width="180dp"
+                android:maxLines="2"
+                android:text="Processed"
+                android:visibility="gone"
+                android:textStyle="normal" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/btnExperimentDetails"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/ripple_blue"
+                android:padding="5dp"
+                android:text="Details"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnctxMenu"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:src="@drawable/ic_more_vert_black_24dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

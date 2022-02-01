@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollViewMainNewExp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.CollectCalibrationDataActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tvCollectWalkId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:text="Walk Id: "
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvNoOfDataPoints"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:text="Data Points"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/mChart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/mChart2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/mChart3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lySensors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCollectWalkId"
+        android:clipToPadding="false"
+
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btnStartCollection"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ripple_green"
+                    android:padding="5dp"
+                    android:text="Start"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:textStyle="normal" />
+
+                <Button
+                    android:id="@+id/btnPauseCollection"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ripple_blue"
+                    android:padding="5dp"
+                    android:text="Pause"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:textStyle="normal"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btnStopCollection"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/ripple_medium_red"
+                    android:padding="5dp"
+                    android:text="Stop"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="12dp"
+                    android:textStyle="normal" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/tvIsStreaming"-->
+    <!--style="@style/sensorHomeParamVal"-->
+    <!--android:layout_below="@+id/lySensors"-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:layout_marginTop="10dp"-->
+    <!--android:padding="10dp"-->
+    <!--android:text="Streaming"-->
+    <!--android:textAllCaps="true"-->
+    <!--android:textColor="@color/blue"-->
+    <!--android:textSize="15sp"-->
+    <!--android:visibility="gone" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/btnCancel"-->
+    <!--style="@style/DialogButton"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_below="@+id/lySensors"-->
+    <!--android:text="OK"-->
+    <!--android:visibility="gone"-->
+    <!--android:textAllCaps="true" />-->
+
+</LinearLayout>

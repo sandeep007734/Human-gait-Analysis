@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:indeterminateTint">@android:color/white</item>
+
+    </style>
+
+    <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:indeterminateTint">@android:color/white</item>
+        <item name="colorPrimary">@color/ColorPrimary</item>
+        <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
+        <item name="actionOverflowMenuStyle">@style/CMOptionsMenu</item>
+
+        <!--<item name="android:actionMenuTextColor">@color/Black</item>-->
+        <!--<item name="textAppearanceLargePopupMenu">@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large</item>-->
+        <!--<item name="textAppearanceSmallPopupMenu">@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Small</item>-->
+    </style>
+
+    <style name="ActionIconTheme">
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="CustomDialogTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+
+    <style name="CMOptionsMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:popupBackground">@color/blue_grey_500</item>
+    </style>
+
+    <style name="NewMaterialTheme" parent="@android:style/Theme.Material">
+        <item name="colorPrimary">@color/ColorPrimary</item>
+        <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
+    </style>
+
+
+    <style name="sensorHomeParamVal" parent="android:Theme.Material">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/gray15</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_gravity">left</item>
+    </style>
+
+    <style name="sensorHomeParamValName" parent="android:Theme.Material">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/gray8</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="sensorSettingTitle" parent="android:Theme.Material">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textColor">@color/Black</item>
+    </style>
+
+    <style name="sensorSettingText" parent="android:Theme.Material">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/gray17</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+
+    <style name="sensorInfo" parent="android:Theme.Material">
+        <item name="android:textColor">@color/Black</item>
+
+    </style>
+
+    <style name="scoreText" parent="android:Theme.Material">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#515151</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_gravity">center_horizontal|center_vertical</item>
+    </style>
+
+    <style name="cardSmallText" parent="android:Theme.Material">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:textSize">10dp</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textColor">#444444</item>
+    </style>
+
+    <!--<item name="android:textSize">20dp</item>-->
+    <!--<item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>-->
+    <!--<item name="android:textColor">@color/Black</item>-->
+    <!--<item name="android:background">@color/GhostWhite</item>-->
+    <!--<item name="android:padding">5dp</item>-->
+    <!-- -->
+    <style name="NormalTextBox">
+        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">0dp</item>
+    </style>
+
+
+
+    <style name="NormalButton" parent="android:style/Widget.Material.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/White</item>
+    </style>
+
+
+    <style name="TitleText" parent="android:Theme.Material">
+        <item name="android:textSize">34dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">fill_parent</item>
+    </style>
+
+    <style name="SubTitleText" parent="android:Theme.Material">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">fill_parent</item>
+    </style>
+
+
+    <style name="BodyText" parent="android:Theme.Material">
+        <item name="android:textSize">18dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="BackColor">
+        <item name="android:background">#EEEEEE</item>
+    </style>
+
+    <style name="FacebookLoginButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+
+    </style>
+
+    <style name="GoogleLoginButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+    >
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="DialogButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:colorControlHighlight">@color/Pink</item>
+    </style>
+
+    <style name="SettingsLinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
+
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginLeft="20dp"-->
+    <!--android:layout_marginRight="20dp"-->
+    <!--android:maxLines="3"-->
+    <!--android:text="Select the Stream and or Log Mode when START command is issued."-->
+    <!--android:textColor="@color/gray18"-->
+    <!--android:textSize="12dp" />-->
+
+    <style name="settingsInfo">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:textColor">@color/gray18</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+</resources>

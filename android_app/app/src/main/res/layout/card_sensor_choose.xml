@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip">
+
+    <CheckBox
+        android:id="@+id/chkSensorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="5dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="CheckBox" />
+
+
+    <Spinner
+        android:id="@+id/spinPositions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/chkSensorName"
+        android:layout_alignBottom="@+id/chkSensorName"
+        android:prompt="@string/select_pos_spinner_title" />
+
+</LinearLayout>

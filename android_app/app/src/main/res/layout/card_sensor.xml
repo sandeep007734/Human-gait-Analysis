@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/sensorCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_margin="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:orientation="horizontal"
+
+        android:padding="10dp"
+
+        >
+
+        <TextView
+            android:id="@+id/tvPosition"
+            style="@style/scoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="1"
+            android:visibility="gone" />
+
+
+        <LinearLayout
+            android:id="@+id/lyCardInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/sensorName"
+                style="@style/sensorHomeParamVal"
+                android:layout_gravity="left"
+                android:layout_marginBottom="0dp"
+
+                android:text="Sensor 01"
+                android:textSize="15dp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tvSensorPos"
+                style="@style/sensorHomeParamVal"
+                android:text="Right Thigh"
+                />
+
+            <TextView
+                android:id="@+id/tvmacAdd"
+                style="@style/sensorHomeParamVal"
+                android:layout_gravity="left"
+
+                android:layout_marginTop="2dp"
+                android:text="00:34:56:78:6G"
+                android:textColor="@color/gray15"
+                android:textSize="12dp"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/tvSensorParamInfo"
+                style="@style/sensorHomeParamVal"
+                android:layout_width="180dp"
+                android:maxLines="2"
+                android:text="Kalman, Stream, 100Hz, 2g, 200dps" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+            <ImageView
+                android:id="@+id/imgSensorInfoError"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/ic_error_black_48dp"
+                android:visibility="visible"
+                />
+                <Space
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+
+                <ImageView
+                    android:id="@+id/imgSensorDetails"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/ic_details_black_48dp"
+                    android:visibility="visible"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <ToggleButton
+                android:id="@+id/toggleStatus"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@color/Green"
+                android:padding="5dp"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textOff="Disconnected"
+                android:textOn="Connected"
+                android:textSize="12dp"
+                android:textStyle="normal" />
+
+            <ToggleButton
+                android:id="@+id/toggleStream"
+
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/ripple_blue"
+                android:padding="5dp"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textOff="Stream Off"
+                android:textOn="Stream On"
+                android:textSize="12dp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btnctxMenu"
+            android:layout_width="25dp"
+            android:layout_height="100dp"
+            android:elevation="2dp"
+            android:src="@drawable/ic_more_vert_black_24dp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,bindingoffset=0.2in,left=2.5cm,right=2.5cm,top=1.5cm,bottom=1.5cm,footskip=.25in]{geometry}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%================================
+\title{Comparison of Angles from Gait Lab and EXL IMU Sensors after Interpolation of the data}
+\author{}
+
+
+\begin{document}
+\maketitle
+
+
+\section*{Comparison}
+
+\begin{equation}
+\alpha_{acc}(t) = \sphericalangle_{2d}
+\left(
+\begin{bmatrix}
+   \tilde{a}_1(t)\cdot x_1\\
+ \tilde{a}_1(t)\cdot y_1
+\end{bmatrix}
+,
+\begin{bmatrix}
+   \tilde{a}_2(t)\cdot x_2\\
+ \tilde{a}_2(t)\cdot y_2
+\end{bmatrix}
+\right)
+\end{equation}
+
+\begin{gather}
+\alpha_{acc+gyr}(t) = \lambda * \alpha_{acc}(t) + (1- \lambda)(\alpha_{acc + gyr}(t-{\Delta}t)+\alpha_{gyr}(t)-\alpha_{gyr}(t-{\Delta}t))
+\\
+where, \lambda \in [0,1]
+\end{gather}
+
+
+
+\bibliography{mybib}{}
+\bibliographystyle{plain}
+\end{document}

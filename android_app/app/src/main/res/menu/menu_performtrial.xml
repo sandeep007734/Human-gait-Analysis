@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activities.HomeScreen">
+
+    <item
+        android:id="@+id/action_save_trial"
+        android:orderInCategory="100"
+        android:title="Save Trial"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_discard_Trial"
+        android:orderInCategory="100"
+        android:title="Discard Trial"
+        app:showAsAction="never" />
+
+
+</menu>

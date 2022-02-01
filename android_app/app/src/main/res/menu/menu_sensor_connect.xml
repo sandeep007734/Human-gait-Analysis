@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activities.HomeScreen">
+
+    <item
+        android:id="@+id/action_connect_all"
+        android:orderInCategory="100"
+        android:title="Connect All"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_disconnect_all"
+        android:orderInCategory="100"
+        android:title="Disconnect All"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_stream_all"
+        android:orderInCategory="100"
+        android:title="Stream On All"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_stream_off"
+        android:orderInCategory="100"
+        android:title="Steam Off All"
+        app:showAsAction="never" />
+
+</menu>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollViewMainNewExp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/lyVerifyCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/tvNewExperimentName"
+                style="@style/NormalTextBox"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:text=""
+                app:met_helperText="Please Enter Trial Name"
+                app:met_maxCharacters="40" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnNewTrialOk"
+                    style="@style/DialogButton"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+
+                    android:text="OK" />
+
+                <Button
+                    android:id="@+id/btnNewTrialCancel"
+                    style="@style/DialogButton"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="5dp"
+
+                    android:text="Cancel" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

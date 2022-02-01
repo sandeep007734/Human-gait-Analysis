@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/lySelectSensorPosition"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rbThigh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Right Thigh"
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/rbLeftThigh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Left Thigh"
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/rbShank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Right Shank" />
+
+                <RadioButton
+                    android:id="@+id/rbLeftShank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Left Shank" />
+
+                <RadioButton
+                    android:id="@+id/rbAnkle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Right Foot" />
+
+                <RadioButton
+                    android:id="@+id/rbLeftAnkle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Left Foot" />
+
+                <RadioButton
+                    android:id="@+id/rbSixteeng"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="\u00B116g"
+                    android:visibility="gone" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSensorPosOk"
+                    style="@style/DialogButton"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+
+                    android:text="OK" />
+
+                <Button
+                    android:id="@+id/btnSensorPosCancel"
+                    style="@style/DialogButton"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="5dp"
+
+                    android:text="Cancel" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

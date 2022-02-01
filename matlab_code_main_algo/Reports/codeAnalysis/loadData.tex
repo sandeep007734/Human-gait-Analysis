@@ -1,0 +1,83 @@
+
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and republish this document.
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{amsmath}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+    
+    
+\subsection*{Contents}
+
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item Loading the raw data from the sensors.
+\end{itemize}
+\begin{verbatim}
+ function [timestamp,acc_s,gyro_s,gyro_s_derv_data,quarternion]
+ = loadData(data,size_data)
+\end{verbatim}
+
+
+\subsection*{Loading the raw data from the sensors.}
+
+\begin{par}
+
+\end{par} \vspace{1em}
+\begin{par}
+
+\end{par} \vspace{1em}
+\begin{par}
+The first of the field contains the timestamp as given from the sensors, then it contains the accelerometer data followed by the Gyroscope data and the Quaternions. Quaternions are calculated by the sensors itself.
+\end{par} \vspace{1em}
+\begin{verbatim}
+timestamp = data(:,1);
+acc_s = data(:, 3:5)';
+gyro_s = data(:, 6:8)';
+\end{verbatim}
+\begin{par}
+Some of the data points need to be modified as per the guidelines given in the documents.
+\end{par} \vspace{1em}
+\begin{verbatim}
+quarternion = data(:, 12:15)'/16384;
+acc_s = 156.91*acc_s/32768;
+gyro_s = (1000*gyro_s/32768)*pi/180;
+\end{verbatim}
+\begin{par}
+
+\end{par} \vspace{1em}
+\begin{par}
+An approx derivatives of the Gyroscope of the numerical is not possible. So an approximation is made using the Thirs order approximation.
+\end{par} \vspace{1em}
+\begin{par}
+$$ Third order equation goes here. $$
+\end{par} \vspace{1em}
+\begin{verbatim}
+gyro_s_derv_data = nan(3, size_data-4);
+for i = 3: size_data-2
+    gyro_s_derv_data (:,i-2) = (gyro_s(:,i-2) - (8*gyro_s(:,i-1)) +
+    (8*gyro_s(:,i+1)) - gyro_s(:,i+2))/ (12);
+end
+\end{verbatim}
+\begin{par}
+There will be some entries in the derviative data which cannot be defined. The entries in the beginning and the entries in the end. They need to be removed so that in laer part we dont get errors. Another way will be to put zeroes where they are not defined. Either case is fine with not much change into the final result. Fix the timestamp according to the new data points present.
+\end{par} \vspace{1em}
+\begin{verbatim}
+gyro_s = gyro_s (:, 3:size_data-2);
+acc_s = acc_s (:, 3: size_data-2);
+quarternion = quarternion(:, 3: size_data-2);
+timestamp = timestamp(1:size(acc_s,2),1);
+\end{verbatim}
+
+
+
+\end{document}
+    

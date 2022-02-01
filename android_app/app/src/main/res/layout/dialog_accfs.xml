@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/settingsInfo"
+            android:text="For the Acceleration and the Angular Velocity you can chose among several full-scale ranges in order to
+best fit the specific application requirement."
+            android:textSize="12dp" />
+
+
+        <LinearLayout
+            android:id="@+id/lyVerifyCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rbTwog"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="\u00B12g"
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/rbFourg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="\u00B14g" />
+
+                <RadioButton
+                    android:id="@+id/rbEightg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="\u00B18g" />
+
+                <RadioButton
+                    android:id="@+id/rbSixteeng"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="\u00B116g" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnAccFsOK"
+                    style="@style/DialogButton"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+
+                    android:text="OK" />
+
+                <Button
+                    android:id="@+id/btnAccFsCancel"
+                    style="@style/DialogButton"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="5dp"
+
+                    android:text="Cancel" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</ScrollView>

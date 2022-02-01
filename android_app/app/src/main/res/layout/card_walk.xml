@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/trialCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:padding="10dp">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        >
+
+        <RelativeLayout
+            android:id="@+id/rlHeaderImgButtons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            >
+
+            <ImageView
+                android:id="@+id/imgResetWalk"
+                style="@style/ActionIconTheme"
+                android:layout_alignParentEnd="true"
+                android:layout_toLeftOf="@+id/imgBtnShowHideCalibration"
+                android:src="@drawable/ic_delete_black_24dp" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+            android:layout_below="@+id/rlHeaderImgButtons"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+
+        >
+
+        <TextView
+            android:id="@+id/tvWalkId"
+            style="@style/scoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="1" />
+
+
+        <LinearLayout
+            android:id="@+id/lyCardInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tvWalkName"
+                style="@style/sensorHomeParamVal"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:text="K. Gopinath"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvWalkFiles"
+                style="@style/sensorHomeParamVal"
+                android:maxLines="3"
+                android:text="Status"
+                android:textStyle="normal"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/btnCalcHSandFoot"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/ripple_blue"
+                android:padding="5dp"
+                android:text="HS and FOOT"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                android:textStyle="normal"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btnCalcAngles"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/ripple_green"
+                android:padding="5dp"
+                android:text="Calculate Angles"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                android:textStyle="normal"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

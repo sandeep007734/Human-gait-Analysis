@@ -1,0 +1,565 @@
+
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and republish this document.
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{color}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+    
+    
+\subsection*{Contents}
+
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item Runninig the Calibration
+   \item Idea behind finding the finding the Knee joint center and Knee Joint
+   \item Sampling of the data
+   \item Doing the calculation for the Joint axes.
+   \item Running the loop for the Joint center axes
+   \item Calculatiing Joint Center coordinates, these are in cartesian coordinates. Preparing the variables
+\end{itemize}
+\begin{verbatim}
+%function [j1_valf, j2_valf] = doCalibration(folder,calibrationFile, calibrationDataFile)
+disp('Doing Calibration');
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}Doing Calibration
+\end{verbatim} \color{black}
+    
+
+\subsection*{Runninig the Calibration}
+
+\begin{par}
+Physical Intrepretation of the output variables:
+\end{par} \vspace{1em}
+\begin{par}
+j1\_valf = The unit Joint axis vector wrt to the local coordinate system of the first segment of the gyroscope. j2\_valf = The unit Joint axis vector wrt to the local coordinate system of the second segment of the gyroscope. and similarly o1\_f = The coordinates of the joint center wrt to the local coordinates of the first sensor o2\_f: The coordinates of the joint center wrt to the local coordinate of the second sensor
+\end{par} \vspace{1em}
+\begin{par}
+Preparing the variables, which will be used in the calculation
+\end{par} \vspace{1em}
+\begin{par}
+Exracting the name of the calibration file.
+\end{par} \vspace{1em}
+\begin{verbatim}
+calibrationFile1 = strcat(folder,calibrationFile(1,:));
+calibrationFile2 = strcat(folder,calibrationFile(2,:));
+\end{verbatim}
+\begin{par}
+Close any open plots. If \textit{showDataGraphs} is set to 1, then relevant plots will be plotted during execution.
+\end{par} \vspace{1em}
+\begin{verbatim}
+close all;
+showDataGraphs = 1;
+\end{verbatim}
+\begin{par}
+Read data from calibration file into a structure.
+\end{par} \vspace{1em}
+\begin{verbatim}
+data = importdata(calibrationFile1);
+data2 = importdata(calibrationFile2);
+\end{verbatim}
+\begin{par}
+Reading the actual sensor data from the structure
+\end{par} \vspace{1em}
+\begin{verbatim}
+tdata = data.data (1:end, :);
+tdata2 = data2.data(1:end, :);
+\end{verbatim}
+\begin{par}
+Some residue data points from previous trails may creep into this one. We need to clear it. Mostly in the beginning and then match the data, so that the data from two sensors synchronize properly based on theire timestamp data. Match the data so that the start and the end of two data matches.
+\end{par} \vspace{1em}
+\begin{verbatim}
+[startIdx1,startIdx2,endIdx1,endIdx2] = matchData(tdata,tdata2);
+data = data.data (startIdx1:endIdx1, :);
+data2 = data2.data(startIdx2:endIdx2, :);
+\end{verbatim}
+\begin{par}
+Getting the size of the data
+\end{par} \vspace{1em}
+\begin{verbatim}
+size_data = size(data,1);
+\end{verbatim}
+\begin{par}
+Read the timestamp, accelerometer, gyrometer, time derivative gyro data and quaternion from the data. Quaternions provide a convenient mathematical notation for represneting orientations and rotations of objects in three dimensions. Compared to Euler angles they are simpler to compose and avoid the problem of gimbal lock. Compared to rotation matrices they are more numerically stable and may be more efficient. A gyroscope is a device that uses Earth’s gravity to help determine orientation. measure the rate of rotation around a particular axis
+\end{par} \vspace{1em}
+\begin{verbatim}
+[timestamp,acc_s_knee,gyro_s_knee,gyro_s_derv_knee,quarternion_knee] = loadData(data,size_data);
+[timestamp,acc_s_shank,gyro_s_shank,gyro_s_derv_shank,quarternion_shank] = loadData(data2,size_data);
+\end{verbatim}
+\begin{par}
+We hope to achieve the convergence well before this no of iteraions We get convergence within 17 18 iterations
+\end{par} \vspace{1em}
+\begin{verbatim}
+num_of_iterations = 30;
+\end{verbatim}
+
+
+\subsection*{Idea behind finding the finding the Knee joint center and Knee Joint}
+
+\begin{par}
+Refer to the equation number 3,4,5 and 6 in the paper IMU-based joint angle measurement for gait analysis.
+\end{par} \vspace{1em}
+\begin{par}
+We are using two IMU sensors, mounted on the thigh and the shank respectively. Lets g1(t) and g2(t) be the angular velocities of the sensors in their respective local frames. and, j1 and j2 be the Unit joint axis vector with respect to the local coordinate system of the sensors.
+\end{par} \vspace{1em}
+\begin{par}
+Then g1(t) and g2(t) differ only by the joint angle velocity and a time variant rotation matrix. Hence their projectiosn into the joint plane(the plane to which the joint axes is the normal vector) have the same lengths for each instant in time.
+\end{par} \vspace{1em}
+
+\begin{verbatim}   ||g1(t)×j1||2 −||g2(t)×j2||2 = 0 ∀t,   (1)\end{verbatim}
+    \begin{par}
+where  · \ensuremath{|}\ensuremath{|}2 denotes the Euclidean norm
+\end{par} \vspace{1em}
+\begin{par}
+This information can be used to identify the hinge joint axis in case the orientation of the sensors towards the segments is unknown. One can simply choose a large set of gyroscopic data from both sensors and search for the vectors ˆj1 and ˆj2 that fulfill (1) in a least-squares sense.
+\end{par} \vspace{1em}
+\begin{par}
+We can write j1 and j2 in spherical coordinates:
+\end{par} \vspace{1em}
+\begin{par}
+j1 = (cos(φ1) cos(θ1), cos(φ1) sin(θ1), sin(φ1))T j2 = (cos(φ2) cos(θ2), cos(φ2) sin(θ2), sin(φ2))T
+\end{par} \vspace{1em}
+\begin{par}
+and define the sum of squared errors:
+\end{par} \vspace{1em}
+\begin{par}
+Ψ(φ1,φ2, θ1, θ2) := summation(ei\^{}2) ;i=1,N ; ei = \texttt{\ensuremath{|}g1(ti)×j1}\ensuremath{|}2 −\ensuremath{|}\ensuremath{|}g2(ti)×j2\ensuremath{|}\ensuremath{|}2 ---eq (6)
+\end{par} \vspace{1em}
+\begin{par}
+By minimizing Ψ(φ1,φ2, θ1, θ2) over its arguments, we identify these true joint axis coordinates. This optimization might be implemented using a Gauss-Newton algorithm, or any other standard optimization method.
+\end{par} \vspace{1em}
+
+
+\subsection*{Sampling of the data}
+
+\begin{par}
+n is the sampling frequency. Here we are taking 10 samples per second for the calculation
+\end{par} \vspace{1em}
+\begin{verbatim}
+n = 10;
+
+gyro_s_knee = gyro_s_knee(:, 1:n:end);
+gyro_s_shank = gyro_s_shank(:, 1:n:end);
+gyro_s_derv_knee = gyro_s_derv_knee(:, 1:n:end);
+gyro_s_derv_shank = gyro_s_derv_shank(:, 1:n:end);
+acc_s_knee = acc_s_knee(:, 1:n:end);
+acc_s_shank = acc_s_shank(:, 1:n:end);
+\end{verbatim}
+
+
+\subsection*{Doing the calculation for the Joint axes.}
+
+\begin{par}
+Prepare the variables for joint center axes Color Palette
+\end{par} \vspace{1em}
+\begin{verbatim}
+cc=hsv(6);
+\end{verbatim}
+\begin{par}
+Arguments for which the funcions need to be minimized. Ψ(φ1,φ2, θ1, θ2)
+\end{par} \vspace{1em}
+\begin{verbatim}
+syms phi1 theta1 phi2 theta2;
+\end{verbatim}
+\begin{par}
+The spherical coordinates representation of the j1 and j2
+\end{par} \vspace{1em}
+\begin{verbatim}
+j1 = [cos(phi1)*cos(theta1); cos(phi1)*sin(theta1); sin(phi1)];
+j2 = [cos(phi2)*cos(theta2); cos(phi2)*sin(theta2); sin(phi2)];
+\end{verbatim}
+\begin{par}
+The angluar velocity split into its x,y and z coordinates
+\end{par} \vspace{1em}
+\begin{verbatim}
+syms g1x g1y g1z g2x g2y g2z;
+g1 = [g1x; g1y; g1z];
+g2 = [g2x; g2y; g2z];
+\end{verbatim}
+\begin{par}
+l1 and l2 is the projection of angular velocities of the respective sensors, in the joint place (The plane to which the joint center axes is normal). Kinematics constraints say that both of this should be equal (in magnitude). Direction will differ. l1 and l2 whose difference sqaure is summed up in the equation 6 ei = \texttt{\ensuremath{|}g1(ti)×j1}\ensuremath{|}2 −\ensuremath{|}\ensuremath{|}g2(ti)×j2\ensuremath{|}\ensuremath{|}2 on right side the first term is e1 and the second one is e2
+\end{par} \vspace{1em}
+\begin{verbatim}
+l1 = cross(g1, j1);
+l2 = cross(g2, j2);
+\end{verbatim}
+\begin{par}
+Normalizing over the all the axes.
+\end{par} \vspace{1em}
+\begin{verbatim}
+norm_l1 = sqrt( (l1(1,1)^2) + (l1(2,1)^2) + (l1(3,1)^2) );
+norm_l2 = sqrt( (l2(1,1)^2) + (l2(2,1)^2) + (l2(3,1)^2) );
+\end{verbatim}
+\begin{par}
+There difference finally gives the e
+\end{par} \vspace{1em}
+\begin{verbatim}
+e = norm_l1 - norm_l2;
+\end{verbatim}
+\begin{par}
+jacobian(f,v) computes the Jacobian Matrix of f with respect to v. The (i,j) element of the result is ∂f(i) \_\_\_ ∂v(j)
+\end{par} \vspace{1em}
+\begin{par}
+syms x y z jacobian([x*y*z, y\^{}2, x + z], [x, y, z]) ans = [ y*z, x*z, x*y] [   0, 2*y,   0] [   1,   0,   1]
+\end{par} \vspace{1em}
+\begin{par}
+Calculating the Jacobain using the e and the arguements
+\end{par} \vspace{1em}
+\begin{verbatim}
+jac_debydx = jacobian (e, [phi1 theta1 phi2 theta2]);
+\end{verbatim}
+
+
+\subsection*{Running the loop for the Joint center axes}
+
+\begin{par}
+Setting up the intial value of the variable Joint center axes
+\end{par} \vspace{1em}
+\begin{verbatim}
+phi1_val = pi/6; theta1_val = pi/3;
+phi2_val = pi/3; theta2_val = pi/6;
+\end{verbatim}
+\begin{par}
+In reality the difference never goes to zero because of the noise present in the data, so we define some threshold. If the difference is eqaul or less than this, its good enough.
+\end{par} \vspace{1em}
+\begin{verbatim}
+threshold1 = 0.000485;
+threshold2 = 1e-4;
+\end{verbatim}
+\begin{par}
+\textit{x\_val} will contains the value of the phi and theta over loop iterations \textit{e\_val} will contains the error (the difference in the length of the projections over the persiod of the time). This should decrease with each loop iterations
+\end{par} \vspace{1em}
+\begin{verbatim}
+x_val = nan(4,num_of_iterations);
+e_val = nan(size(gyro_s_knee,2), num_of_iterations);
+
+j1_val = nan(3,num_of_iterations);
+j2_val = nan(3,num_of_iterations);
+
+x_val(:,1) = [phi1_val; theta1_val; phi2_val; theta2_val];
+
+squareSummation = 0;
+\end{verbatim}
+\begin{par}
+Calculating Joint Center Axes coordinates
+\end{par} \vspace{1em}
+\begin{verbatim}
+for k = 1 : num_of_iterations
+    squareSummation_old = squareSummation;
+    squareSummation = 0;
+
+    Jac = nan(size(gyro_s_knee,2),4);
+    Jac_T =  nan(4, size(gyro_s_knee,2));
+\end{verbatim}
+\begin{par}
+Extracting the respective theta and phi for hte joint axes jVal, given the theta and phi returns the axes in the spherical coordinates
+\end{par} \vspace{1em}
+\begin{verbatim}
+    j1_val(:,k) = jVal(x_val(1,k), x_val(2,k));
+    j2_val(:,k) = jVal(x_val(3,k), x_val(4,k));
+\end{verbatim}
+\begin{par}
+This iterates over all the data points and calculat the sqaure of the total error. As mentioned in the equation 6
+\end{par} \vspace{1em}
+\begin{verbatim}
+    for i=1:size(gyro_s_knee,2)
+        g1_val = gyro_s_knee(:,i);
+        g2_val = gyro_s_shank(:,i);
+
+        Jac(i,:) = subs(jac_debydx, [phi1, theta1, phi2, theta2, g1x, g1y, g1z, g2x, g2y, g2z], ...
+            [x_val(1,k), x_val(2,k), x_val(3,k), x_val(4,k), g1_val(1), g1_val(2), g1_val(3), g2_val(1), g2_val(2), g2_val(3)]);
+
+        Jac_T(:,i) = Jac(i,:)';
+
+        e_val(i,k) = subs(e, [phi1, theta1, phi2, theta2, g1x, g1y, g1z, g2x, g2y, g2z], ...
+            [x_val(1,k), x_val(2,k), x_val(3,k), x_val(4,k), g1_val(1), g1_val(2), g1_val(3), g2_val(1), g2_val(2), g2_val(3)]);
+
+        squareSummation = squareSummation + e_val(i,k)^2;
+
+    end
+\end{verbatim}
+\begin{par}
+Matrix multiplication. Not sure what Jz represents here TODO
+\end{par} \vspace{1em}
+\begin{verbatim}
+    Jz = -Jac_T*Jac;
+\end{verbatim}
+\begin{par}
+mldivide solves system of linear equations x = mldivide(A,B), solves Ax = B g should be the moore -penrose inverse as given in the paper
+\end{par} \vspace{1em}
+\begin{verbatim}
+    g = mldivide(Jz,Jac_T);
+    x_val(:,k+1) = x_val(:,k)+g*e_val(:,k);
+
+    err(k) = squareSummation - squareSummation_old;
+    disp(sprintf('Calculating Joint center Axis. Iteration %d the diff is %f and SquareSum is %f',k,err(k),squareSummation));
+
+    if (abs(err(k)) <= threshold1);
+        break
+    end
+end
+\end{verbatim}
+\begin{par}
+Plot the figure showing the conversion..
+\end{par} \vspace{1em}
+\begin{verbatim}
+if showDataGraphs == 1
+    figure; grid;hold on;
+    plot( j1_val(1,:),'color',cc(1,:), 'LineWidth',2,'Marker', '*');
+    plot( j1_val(2,:),'color',cc(2,:), 'LineWidth',2,'Marker', '*');
+    plot( j1_val(3,:),'color',cc(3,:),'LineWidth',2,'Marker', '*');
+    plot( j2_val(1,:),'color',cc(4,:),'LineWidth',2,'Marker', '*');
+    plot( j2_val(2,:),'color',cc(5,:),'LineWidth',2,'Marker', '*');
+    plot( j2_val(3,:),'color',cc(6,:),'LineWidth',2,'Marker', '*');
+end
+\end{verbatim}
+\begin{par}
+The value generated in the last iteration, where everything convreged is the joint center axes.
+\end{par} \vspace{1em}
+\begin{verbatim}
+j1_valf = j1_val(:,k);
+j2_valf = j2_val(:,k);
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}Calculating Joint center Axis. Iteration 1 the diff is 325.522978 and SquareSum is 325.522978
+Calculating Joint center Axis. Iteration 2 the diff is 9.492485 and SquareSum is 335.015463
+Calculating Joint center Axis. Iteration 3 the diff is -92.967497 and SquareSum is 242.047966
+Calculating Joint center Axis. Iteration 4 the diff is 55.822216 and SquareSum is 297.870182
+Calculating Joint center Axis. Iteration 5 the diff is 12.777557 and SquareSum is 310.647739
+Calculating Joint center Axis. Iteration 6 the diff is -33.960315 and SquareSum is 276.687423
+Calculating Joint center Axis. Iteration 7 the diff is -104.739176 and SquareSum is 171.948247
+Calculating Joint center Axis. Iteration 8 the diff is 61.597207 and SquareSum is 233.545454
+Calculating Joint center Axis. Iteration 9 the diff is -67.625799 and SquareSum is 165.919655
+Calculating Joint center Axis. Iteration 10 the diff is 182.206526 and SquareSum is 348.126181
+Calculating Joint center Axis. Iteration 11 the diff is -97.900668 and SquareSum is 250.225513
+Calculating Joint center Axis. Iteration 12 the diff is -3.823174 and SquareSum is 246.402340
+Calculating Joint center Axis. Iteration 13 the diff is -7.900123 and SquareSum is 238.502216
+Calculating Joint center Axis. Iteration 14 the diff is -136.731851 and SquareSum is 101.770365
+Calculating Joint center Axis. Iteration 15 the diff is -72.794972 and SquareSum is 28.975393
+Calculating Joint center Axis. Iteration 16 the diff is -18.384103 and SquareSum is 10.591290
+Calculating Joint center Axis. Iteration 17 the diff is -5.711680 and SquareSum is 4.879610
+Calculating Joint center Axis. Iteration 18 the diff is -0.105528 and SquareSum is 4.774082
+Calculating Joint center Axis. Iteration 19 the diff is -0.000888 and SquareSum is 4.773194
+Calculating Joint center Axis. Iteration 20 the diff is -0.002658 and SquareSum is 4.770536
+Calculating Joint center Axis. Iteration 21 the diff is -0.000630 and SquareSum is 4.769906
+Calculating Joint center Axis. Iteration 22 the diff is -0.005737 and SquareSum is 4.764169
+Calculating Joint center Axis. Iteration 23 the diff is -0.007392 and SquareSum is 4.756778
+Calculating Joint center Axis. Iteration 24 the diff is -0.004246 and SquareSum is 4.752532
+Calculating Joint center Axis. Iteration 25 the diff is 0.003393 and SquareSum is 4.755925
+Calculating Joint center Axis. Iteration 26 the diff is -0.000485 and SquareSum is 4.755439
+Calculating Joint center Axis. Iteration 27 the diff is 0.005645 and SquareSum is 4.761084
+Calculating Joint center Axis. Iteration 28 the diff is -0.001160 and SquareSum is 4.759925
+Calculating Joint center Axis. Iteration 29 the diff is 0.007453 and SquareSum is 4.767377
+Calculating Joint center Axis. Iteration 30 the diff is -0.002297 and SquareSum is 4.765080
+\end{verbatim} \color{black}
+    
+\includegraphics [width=4in]{doCalibration_01.eps}
+
+
+\subsection*{Calculatiing Joint Center coordinates, these are in cartesian coordinates. Preparing the variables}
+
+\begin{par}
+Refer to the equations 7, 8 and 9 in the paper: IMU-based joint angle measurement for gait analysis.
+\end{par} \vspace{1em}
+\begin{par}
+The fact that the acceleration of each sensor can be thought of as the sum of the joint center’s  acceleration and the acceleration due to the rotation of that sensor around the joint center.  Apparently, the acceleration of the joint center must be the same in both local frames, up to some time-variant rotation matrix that corresponds to the rotation of both local frames to each other.  Mathematically, this constraint is expressed by:
+\end{par} \vspace{1em}
+\begin{par}
+\texttt{\ensuremath{|}a1(t)−Γg1(t)(o1)}\ensuremath{|}2 −\ensuremath{|}\ensuremath{|}a2(t)−Γg2(t)(o2)\ensuremath{|}\ensuremath{|}2 = 0 ∀t ---- (7)
+\end{par} \vspace{1em}
+\begin{par}
+where, Γgi(t)(oi) := gi(t)×(gi(t)×oi)+ ˙gi(t)×oi, i = 1, 2 ----- (8)
+\end{par} \vspace{1em}
+\begin{par}
+Intializing the symbols o1 is the joint center coordinates with respect to the sensor 1 o2 is the joint center coordinates with respect to the sensor 2
+\end{par} \vspace{1em}
+\begin{verbatim}
+syms o1x o1y o1z o2x o2y o2z;
+\end{verbatim}
+\begin{par}
+Gyroscope values in all the axes
+\end{par} \vspace{1em}
+\begin{verbatim}
+syms g1x g1y g1z g2x g2y g2z;
+\end{verbatim}
+\begin{par}
+Gyroscope time derivative values in all the axes
+\end{par} \vspace{1em}
+\begin{verbatim}
+syms gd1x gd1y gd1z gd2x gd2y gd2z;
+\end{verbatim}
+\begin{par}
+Accelerometer values in all the axes
+\end{par} \vspace{1em}
+\begin{verbatim}
+syms a1x a1y a1z a2x a2y a2z;
+\end{verbatim}
+\begin{par}
+The Joint center coordinates
+\end{par} \vspace{1em}
+\begin{verbatim}
+o1 = [o1x; o1y; o1z];
+o2 = [o2x; o2y; o2z];
+
+% The Gyro Values
+g1 = [g1x; g1y; g1z];
+g2 = [g2x; g2y; g2z];
+
+% Time derivate Gyro Values
+gd1 = [gd1x; gd1y; gd1z];
+gd2 = [gd2x; gd2y; gd1z];
+
+% The acceleration values
+a1 = [a1x; a1y; a1z];
+a2 = [a2x; a2y; a2z];
+
+
+% Calculating the equation 8
+rad_acc_1 = cross(g1, cross(g1,o1)) + cross(gd1, o1);
+rad_acc_2 = cross(g2, cross(g2,o2)) + cross(gd2, o2);
+
+
+% Calculating the Error
+l1 = a1 - rad_acc_1;
+l2 = a2 - rad_acc_2;
+
+%Normalizing for all the axes
+norm_l1 = sqrt( (l1(1,1)^2) + (l1(2,1)^2) + (l1(3,1)^2) );
+norm_l2 = sqrt( (l2(1,1)^2) + (l2(2,1)^2) + (l2(3,1)^2) );
+
+%Finale eror
+e = norm_l1 - norm_l2;
+
+%Same as before
+jac_debydx = jacobian (e, [o1x o1y o1z o2x o2y o2z]);
+
+% Initializing the variables
+o1x_val = 1; o1y_val = 0.8; o1z_val = 1;
+o2x_val = 1; o2y_val = 0.9; o2z_val = 0.5;
+\end{verbatim}
+\begin{par}
+\textit{x\_val} will contains the value of the Joint center coordinates over loop iterations \textit{e\_val} will contains the error This should decrease with each loop iterations
+\end{par} \vspace{1em}
+\begin{verbatim}
+x_val = nan(6,num_of_iterations);
+e_val = nan(size(gyro_s_knee,2), num_of_iterations);
+
+x_val(:,1) = [o1x_val; o1y_val; o1z_val; o2x_val; o2y_val; o2z_val];
+
+squareSummation = 0;
+
+for k = 1 : num_of_iterations
+    squareSummation_old = squareSummation;
+    squareSummation = 0;
+
+    Jac = nan(size(acc_s_knee,2),6);
+    Jac_T =  nan(6, size(acc_s_knee,2));
+
+    for i=1:size(acc_s_knee,2)
+        a1_val = acc_s_knee(:,i);
+        a2_val = acc_s_shank(:,i);
+
+        g1_val = gyro_s_knee(:,i);
+        g2_val = gyro_s_shank(:,i);
+
+        gd1_val = gyro_s_derv_knee(:,i);
+        gd2_val = gyro_s_derv_shank(:,i);
+
+        Jac(i,:) = subs(jac_debydx, [o1x, o1y, o1z, g1x, g1y, g1z, gd1x, gd1y, gd1z, o2x, o2y, o2z, ...
+            g2x, g2y, g2z, gd2x, gd2y, gd2z, a1x, a1y, a1z, a2x, a2y, a2z], ...
+            [x_val(1,k), x_val(2,k), x_val(3,k), g1_val(1), g1_val(2), g1_val(3), ...
+            gd1_val(1), gd1_val(2), gd1_val(3),x_val(4,k), x_val(5,k), x_val(6,k), ...
+            g2_val(1), g2_val(2), g2_val(3), gd2_val(1), gd2_val(2), gd2_val(3), a1_val(1), a1_val(2), a1_val(3), ...
+            a2_val(1), a2_val(2), a2_val(3)]);
+
+        Jac_T(:,i) = Jac(i,:)';
+
+        e_val(i,k) = subs(e, [o1x, o1y, o1z, g1x, g1y, g1z, gd1x, gd1y, gd1z, o2x, o2y, o2z, ...
+            g2x, g2y, g2z, gd2x, gd2y, gd2z, a1x, a1y, a1z, a2x, a2y, a2z], ...
+            [x_val(1,k), x_val(2,k), x_val(3,k), g1_val(1), g1_val(2), g1_val(3), ...
+            gd1_val(1), gd1_val(2), gd1_val(3),x_val(4,k), x_val(5,k), x_val(6,k), ...
+            g2_val(1), g2_val(2), g2_val(3), gd2_val(1), gd2_val(2), gd2_val(3), a1_val(1), a1_val(2), a1_val(3), ...
+            a2_val(1), a2_val(2), a2_val(3)]);
+
+        squareSummation = squareSummation + e_val(i,k)^2;
+
+    end
+    Jz = -Jac_T*Jac;
+    g = Jz\Jac_T;
+    x_val(:,k+1) = x_val(:,k)+g*e_val(:,k);
+
+    err(k) = squareSummation - squareSummation_old;
+    disp(sprintf('Joint center coordinates.Iteration %d the diff is %f and the g val is %f',k,err(k),mean(mean(g))));
+
+    if (abs(err(k)) <= threshold2);
+        break
+    end
+
+end
+\end{verbatim}
+\begin{par}
+Figure showing the conversion
+\end{par} \vspace{1em}
+\begin{verbatim}
+if showDataGraphs == 1
+    figure; grid;hold on;
+    plot( x_val(1,:),'color',cc(1,:), 'LineWidth',2,'Marker', '*');
+    plot( x_val(2,:),'color',cc(2,:), 'LineWidth',2,'Marker', '*');
+    plot( x_val(3,:),'color',cc(3,:),'LineWidth',2,'Marker', '*');
+    plot( x_val(4,:),'color',cc(4,:),'LineWidth',2,'Marker', '*');
+    plot( x_val(5,:),'color',cc(5,:),'LineWidth',2,'Marker', '*');
+    plot( x_val(6,:),'color',cc(6,:),'LineWidth',2,'Marker', '*');
+end
+\end{verbatim}
+\begin{par}
+Getting the last values, where the equation converged
+\end{par} \vspace{1em}
+\begin{verbatim}
+o1_val = x_val(1:3, k);
+o2_val = x_val(4:6, k);
+\end{verbatim}
+\begin{par}
+Since the result of that optimization, denoted by o1\^{}, o2\^{}, refers to an arbitrary point along the joint axis, we shift it as close as possible to the sensors by applying:
+\end{par} \vspace{1em}
+\begin{verbatim}
+o1_f = o1_val - j1_valf * (dot(o1_val,j1_valf) + dot(o2_val,j2_valf))/2;
+o2_f = o2_val - j2_valf * (dot(o1_val,j1_valf) + dot(o2_val,j2_valf))/2;
+\end{verbatim}
+\begin{par}
+Save the Joint center axes and coordinates in the calibration file, so that the next time it doesnot have to run again.
+\end{par} \vspace{1em}
+\begin{verbatim}
+save(calibrationDataFile,'j1_valf','j2_valf','o1_f','o2_f');
+disp('Calibration Done');
+\end{verbatim}
+
+        \color{lightgray} \begin{verbatim}Joint center coordinates.Iteration 1 the diff is 1207.627149 and the g val is 0.000801
+Joint center coordinates.Iteration 2 the diff is -454.538849 and the g val is -0.000902
+Joint center coordinates.Iteration 3 the diff is 17.209836 and the g val is 0.000736
+Joint center coordinates.Iteration 4 the diff is -152.097330 and the g val is 0.001762
+Joint center coordinates.Iteration 5 the diff is -166.910919 and the g val is 0.001611
+Joint center coordinates.Iteration 6 the diff is -140.611573 and the g val is 0.001918
+Joint center coordinates.Iteration 7 the diff is -65.899929 and the g val is 0.001796
+Joint center coordinates.Iteration 8 the diff is -4.374029 and the g val is 0.001769
+Joint center coordinates.Iteration 9 the diff is -0.460533 and the g val is 0.001759
+Joint center coordinates.Iteration 10 the diff is -0.052795 and the g val is 0.001758
+Joint center coordinates.Iteration 11 the diff is -0.006320 and the g val is 0.001757
+Joint center coordinates.Iteration 12 the diff is -0.000767 and the g val is 0.001757
+Joint center coordinates.Iteration 13 the diff is -0.000094 and the g val is 0.001757
+Calibration Done
+\end{verbatim} \color{black}
+    
+\includegraphics [width=4in]{doCalibration_02.eps}
+
+
+
+\end{document}
+    

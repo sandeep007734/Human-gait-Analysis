@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: driftAnalysis.aux
+The style file: plain.bst
+Database file #1: mybib.bib
+A bad cross reference---entry "conf/IEEEcca/SeelSR12"
+refers to entry "conf/IEEEcca/2012", which doesn't exist
+Warning--I didn't find a database entry for "conf/IEEEcca/2012"
+You've used 2 entries,
+            2118 wiz_defined-function locations,
+            514 strings with 4376 characters,
+and the built_in function-call counts, 792 in all, are:
+= -- 76
+> -- 36
+< -- 1
++ -- 14
+- -- 12
+* -- 56
+:= -- 132
+add.period$ -- 7
+call.type$ -- 2
+change.case$ -- 12
+chr.to.int$ -- 0
+cite$ -- 2
+duplicate$ -- 32
+empty$ -- 63
+format.name$ -- 12
+if$ -- 172
+int.to.chr$ -- 0
+int.to.str$ -- 2
+missing$ -- 2
+newline$ -- 13
+num.names$ -- 4
+pop$ -- 12
+preamble$ -- 1
+purify$ -- 10
+quote$ -- 0
+skip$ -- 23
+stack$ -- 0
+substring$ -- 42
+swap$ -- 10
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 8
+warning$ -- 0
+while$ -- 7
+width$ -- 3
+write$ -- 25
+(There was 1 error message)

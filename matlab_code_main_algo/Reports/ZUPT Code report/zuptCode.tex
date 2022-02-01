@@ -1,0 +1,182 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,bindingoffset=0.2in,left=2.5cm,right=2.5cm,top=1.5cm,bottom=1.5cm,footskip=.25in]{geometry}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+%================================
+\title{Detection of IC, FO. Velocity and Position Estimate using ZUPT and Kalman Filter}
+\author{Sandeep Kumar, Laura Rocchi, K. Gopinath, Poorna T. S.\\
+CSA, Indian Institute of Science\\
+Robert Bosch Center for Cyber Physical Systems, IISc
+}
+
+
+\begin{document}
+\maketitle
+
+\section*{Introduction}
+This brief report contains the method used to detect IC (Initial Contact) and FO (Foot Off) using the data gathered from placing an IMU sensor on the foot. We also used this data, specifically the Accelerometer data from the foot to calculate the velocity and  position of the user \footnote{All the results shown hence forward are for walk number 20 (EXL IMU sensor labeling)}. A ZUPT (Zero Velocity Update ) algorithm along with a Kalman filter was used to remove the drift which creeps in because of the noise present in the accelerometer data.
+
+\section*{Code and Implementation}
+
+$ a_x $ $ a_y $ and $ a_z $ are the accelerometer reading in the X Y and Z direction. 
+
+\begin{equation}
+roll = arctan(\frac{a_y^{sensor}}{a_z^{sensor}})
+\end{equation}
+\begin{equation}
+pitch=-arcsin(\frac{a_x^{sensor}}{g})
+\end{equation}
+\begin{equation}
+yaw=0
+\end{equation}
+
+From this we get C, which is the orientation matrix
+\begin{equation}
+C = \begin{pmatrix}
+cos(pitch) & sin(roll)sin(pitch) & cos(roll)sin(pitch)\\
+0 & cos(roll) & -sin(roll)\\
+-sin(pitch) & sin(roll)cos(pitch) & cos(roll)cos(pitch)
+\end{pmatrix}
+\end{equation}
+
+\paragraph{Aim:}
+Our aim is to calculate the heading, acceleration, velocity, position and distance of the subject.
+
+\paragraph{Initialization:} The first step is to initialize the variables. The value of some of the variables are dependent on the type of sensor and method of data collection.
+
+\paragraph{Main Loop:} We loop for each data point present. The main work done is as follow:
+\begin{itemize}
+\item Subtract the Gyroscope bias from the Gyroscope reading.
+\item Define the Skew-symmetric matrix for angular rates
+\begin{equation}
+\Omega_k = 
+\begin{pmatrix}
+0 & -\omega_z & \omega_y\\
+\omega_z & 0 & -\omega_x\\
+-\omega_y & \omega_x & 0
+\end{pmatrix}
+\end{equation}
+
+Here $ \omega $ is s particular instance of the Gyroscope reading.
+
+\item Update the Orientation Estimate
+\begin{equation}
+C = C_{prev}*\frac{2I_{3X3}+\Omega_k \Delta t}{2I_{3X3}-\Omega_k \Delta t}
+\end{equation}
+$ \Delta t $ for our data is 0.01, as the data collection is done at 100Hz
+
+\item Transform the acceleration from Sensors frame to Navigation frame.	
+
+\begin{equation}
+a_k^{nav} = \frac{(C_k + C_{k-1})a_k^{sensor}}{2}
+\end{equation}
+
+Use the average of current and the previous Orientation as the movement has occurred in between these two.
+
+\item Integrate this acceleration to get velocity\\
+Using the trapeze method of integration.
+\begin{equation}
+v_k = v_{k-1}+\frac{(a_k^{nav}+a_{k-1}^{nav}-2\begin{pmatrix}
+0\\0\\g
+\end{pmatrix}
+)\Delta t}{2}
+\end{equation}
+\item Integrate the velocity to get the position\\
+Using the trapeze method of integration.
+\begin{equation}
+p_k = \frac{p_{k-1}+(v_k+v_{k-1}) \Delta t}{2}
+\end{equation}
+
+\item Construct the skew-symmetric cross-product operator matrix S from the navigation frame accelerations
+
+\begin{equation}
+S_k = \begin{pmatrix}
+0 & -a_z & a_y\\
+a_z & 0 & -a_x\\
+-a_y & a_x & 0
+\end{pmatrix}
+\end{equation}
+This matrix relates the variation in velocity errors to the variation in orientation errors.
+
+\item Construct the state  transition matrix:
+\begin{equation}
+F_k = \begin{pmatrix}
+I_{3X3} & 0_{3X3} & 0_{3X3}\\
+0_{3X3} & I_{3X3} & I_{3X3} \Delta t \\
+-S_k \Delta t & 0_{3X3} & I_{3X3}
+\end{pmatrix}
+\end{equation}
+
+\item Construct the process noise covariance matrix $ Q_k $ as the diagonal matrix
+\begin{equation}
+Q_k = \bigg( 
+\begin{pmatrix}
+\sigma_{\omega_x} & \sigma_{\omega_y} & \sigma_{\omega_z} & 0 & 0 & 0 & \sigma_{a_x} & \sigma_{a_y} & \sigma_{a_z}
+\end{pmatrix}
+\Delta t
+\bigg)^2
+\end{equation}
+
+\item Propagate the error covariance matrix
+\begin{equation}
+P_k = F_kP_{k-1}F_k^T+Q_k
+\end{equation}
+This is valid if we assume process noise is identical on all axes
+\end{itemize}
+
+\paragraph{Stationary Phase: }
+Then we detect the stationary phase of the foot and the steps after this are only applied to those data points which comes under this category.
+
+\begin{itemize}
+\item Compute the Kalman gain
+\begin{equation}
+K_k=\frac{P_kH^T}{(HP_kH^T+R)}
+\end{equation}
+where, H is zero-velocity (ZV) measurement matrix:
+$ H = \begin{pmatrix}
+0_{3X3} & 0_{3X3} & I_{3X3}
+\end{pmatrix} $ \\\\
+R is a diagonal matrix m which defines the ZV measurement noise covariance: 
+\begin{equation}
+R = \begin{pmatrix}
+\sigma^2_{v_x} & \sigma^2_{v_y} & \sigma^2_{v_z}
+\end{pmatrix}
+\end{equation}
+\item Compute state erros from the Kalman gain and estimated velocity
+\begin{equation}
+\varepsilon_k=(\varepsilon_l \varepsilon_p \varepsilon_v)^T = K_kv_k
+\end{equation}
+Here, the complete error vector $ \varepsilon $   is composed of the three elements of the attitude error (error on roll, pitch and yaw angles), the position error, the velocity error in that order.
+
+\item Corrent the error covariance
+\begin{equation}
+P_k = (I_{9X9}-K_kH)P_k
+\end{equation}
+
+\item Construct the skew-symmetric correction matrix for small angles
+\begin{equation}
+\Omega_{\varepsilon,k} = \begin{pmatrix}
+0 & \varepsilon_l[3] & -\varepsilon_l[2]\\
+-\varepsilon_l[3] & 0 & \varepsilon_l[1]\\
+\varepsilon_l[2] & -\varepsilon_l[1] & 0
+\end{pmatrix}
+\end{equation}
+The indices are one-based, so $ \epsilon_l[1] $ is the first element of the attitude error(roll).
+
+\item Correct the attitude estimate:
+\begin{equation}
+C_k = \frac{(2I_{3X3}+\Omega_{\varepsilon,k})*C_k}{(2I_{3X3}-\Omega_{\varepsilon,k})}
+\end{equation}
+Pre-multiply by the correction factor, because the correction is computed in the navigation frame.
+
+\item Correct the position estimate: $ P_k=P_k-\varepsilon_p $
+\item Correct the velocity estimate: $ v_k = v_k-\varepsilon_v $
+\end{itemize}
+\bibliography{mybib}{}
+\bibliographystyle{plain}
+\end{document}

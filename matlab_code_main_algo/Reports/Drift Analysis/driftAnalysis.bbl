@@ -1,0 +1,14 @@
+\begin{thebibliography}{1}
+
+\bibitem{s140406891}
+Thomas Seel, Jörg Raisch, and Thomas Schauer.
+\newblock Imu-based joint angle measurement for gait analysis.
+\newblock {\em Sensors}, 14(4):6891, 2014.
+
+\bibitem{conf/IEEEcca/SeelSR12}
+Thomas Seel, Thomas Schauer, and Jörg Raisch.
+\newblock Joint axis and position estimation from inertial measurement data by
+  exploiting kinematic constraints.
+\newblock In {\em CCA}, pages 45--49. IEEE, 2012.
+
+\end{thebibliography}
